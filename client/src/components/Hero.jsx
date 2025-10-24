@@ -199,7 +199,7 @@ export default function Hero({ onLaunch }) {
           className="orbit-container"
           style={{
             top: "25%",
-            left: "40%",
+            left: "37%",
             transform: "translate(-50%, -50%)",
             zIndex: -2222,
           }}
