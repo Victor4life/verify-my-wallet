@@ -6,6 +6,8 @@ import WalletActions from "./WalletActions";
 import { toast } from "react-toastify";
 import VerificationBadge from "./VerificationBadge";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function MainApp() {
   const [walletType, setWalletType] = useState("");
   const [walletAddress, setWalletAddress] = useState("");
@@ -89,7 +91,7 @@ function MainApp() {
   const generateNonce = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/generate-nonce");
+      const res = await axios.get(`${API_URL}/generate-nonce`);
       setNonce(res.data.nonce);
       toast.info("🌀 Nonce generated — please sign it next!");
     } catch (err) {
@@ -155,7 +157,7 @@ function MainApp() {
 
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:5000/verify-proof", {
+      const res = await axios.post(`${API_URL}/verify-proof`, {
         nonce,
         proof,
         accountId: walletAddress,

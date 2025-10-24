@@ -160,7 +160,7 @@ export default function Hero({ onLaunch }) {
         }}
       >
         {/* Orbiting Wallet Icons */}
-        {/*<div
+        <div
           className="orbit-container"
           style={{
             top: "25%",
@@ -180,7 +180,7 @@ export default function Hero({ onLaunch }) {
             }}
           />
           <img
-            src="/metamask.webp"
+            src="/walletconnect.jpg"
             alt="WalletConnect"
             className="wallet-icon"
             style={{
@@ -190,7 +190,7 @@ export default function Hero({ onLaunch }) {
             }}
           />
           <img
-            src="/coinbase.png"
+            src="/hashpack.png"
             alt="HashPack"
             className="wallet-icon"
             style={{
@@ -209,7 +209,7 @@ export default function Hero({ onLaunch }) {
               transform: "translate(-50%, -50%)",
             }}
           />
-        </div>*/}
+        </div>
 
         <h1
           style={{

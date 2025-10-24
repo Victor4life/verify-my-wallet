@@ -47,14 +47,14 @@ export default function VerificationBadge({
             <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-500 via-emerald-400 to-cyan-300 blur-sm opacity-25 group-hover:opacity-50 animate-pulse-slow transition-all duration-300"></div>
 
             {/* Shield core (smaller size) */}
-            <div className="relative w-6 h-6 flex items-center justify-center rounded-full bg-gradient-to-br from-[#0d1117] to-[#111827] border border-white/10 shadow-[0_0_8px_rgba(0,255,200,0.15)]">
+            <div className="relative w-4 h-4 flex items-center justify-center rounded-full bg-gradient-to-br from-[#0d1117] to-[#111827] border border-white/10 shadow-[0_0_6px_rgba(0,255,200,0.15)]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="url(#shieldGradient)"
-                strokeWidth="1.2"
-                className="w-3 h-3 text-emerald-400 drop-shadow-[0_0_4px_rgba(16,185,129,0.7)] animate-glow"
+                strokeWidth="1"
+                className="w-2.5 h-2.5 text-emerald-400 drop-shadow-[0_0_3px_rgba(16,185,129,0.7)] animate-glow"
               >
                 <defs>
                   <linearGradient
