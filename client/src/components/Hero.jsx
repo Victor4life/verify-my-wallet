@@ -7,7 +7,6 @@ export default function Hero({ onLaunch }) {
     onLaunch();
   };
 
-  // Animate wallet icons orbiting around the hero
   useEffect(() => {
     const style = document.createElement("style");
     style.innerHTML = `
@@ -15,26 +14,62 @@ export default function Hero({ onLaunch }) {
         from { transform: rotate(0deg); }
         to { transform: rotate(360deg); }
       }
+
       .orbit-container {
         position: absolute;
-        width: 400px;
-        height: 400px;
+        width: 300px;
+        height: 300px;
         border-radius: 50%;
         animation: orbit 40s linear infinite;
         pointer-events: none;
         z-index: 0;
       }
+
       .wallet-icon {
         position: absolute;
-        width: 55px;
-        height: 55px;
+        width: 45px;
+        height: 45px;
         border-radius: 50%;
         box-shadow: 0 0 15px rgba(0,255,200,0.3);
         transition: transform 0.3s ease;
       }
+
       .wallet-icon:hover {
         transform: scale(1.15);
         box-shadow: 0 0 25px rgba(0,255,255,0.6);
+      }
+
+      /* 🔹 Mobile Responsiveness */
+      @media (max-width: 768px) {
+        .orbit-container {
+          width: 180px;
+          height: 180px;
+        }
+        .wallet-icon {
+          width: 35px;
+          height: 35px;
+        }
+        .hero-title {
+          font-size: 1.8rem !important;
+        }
+        .hero-text {
+          font-size: 1rem !important;
+          max-width: 90% !important;
+          margin: 0 auto !important;
+        }
+        nav ul {
+          display: none !important;
+        }
+        nav {
+          padding: 10px 20px !important;
+        }
+        .hero-buttons {
+          flex-direction: column !important;
+          gap: 15px !important;
+        }
+        footer {
+          font-size: 0.8rem !important;
+        }
       }
     `;
     document.head.appendChild(style);
@@ -90,7 +125,7 @@ export default function Hero({ onLaunch }) {
           <img
             src="/VerifyMyWallet-Icon.png"
             alt="VerifyMyWallet Logo"
-            style={{ borderRadius: "50px", width: "45px", height: "45px" }}
+            style={{ borderRadius: "50px", width: "40px", height: "40px" }}
           />
         </div>
 
@@ -121,26 +156,18 @@ export default function Hero({ onLaunch }) {
         <button
           onClick={handleLaunch}
           style={{
-            background: "#eee",
+            background: "linear-gradient(90deg, #00e676, #00b0ff)",
             border: "none",
             borderRadius: "20px",
-            padding: "10px 26px",
+            padding: "10px 20px",
             color: "#111",
-            fontSize: "1rem",
+            fontSize: "0.9rem",
             fontWeight: "600",
             cursor: "pointer",
             transition: "all 0.3s ease",
           }}
-          onMouseOver={(e) =>
-            (e.target.style.background =
-              "linear-gradient(90deg, #00bfa5, #0091ea)")
-          }
-          onMouseOut={(e) =>
-            (e.target.style.background =
-              "linear-gradient(90deg, #00e676, #00b0ff)")
-          }
         >
-          Launch App
+          Launch
         </button>
       </nav>
 
@@ -155,16 +182,14 @@ export default function Hero({ onLaunch }) {
           justifyContent: "center",
           alignItems: "center",
           textAlign: "center",
-          gap: "10px",
-          paddingTop: "10px",
+          padding: "0 15px",
         }}
       >
-        {/* Orbiting Wallet Icons */}
         <div
           className="orbit-container"
           style={{
             top: "25%",
-            left: "35%",
+            left: "40%",
             transform: "translate(-50%, -50%)",
             zIndex: -2222,
           }}
@@ -173,45 +198,30 @@ export default function Hero({ onLaunch }) {
             src="/metamask.webp"
             alt="MetaMask"
             className="wallet-icon"
-            style={{
-              top: "0%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-            }}
+            style={{ top: "0%", left: "50%" }}
           />
           <img
             src="/walletconnect.jpg"
             alt="WalletConnect"
             className="wallet-icon"
-            style={{
-              top: "50%",
-              left: "100%",
-              transform: "translate(-50%, -50%)",
-            }}
+            style={{ top: "50%", left: "100%" }}
           />
           <img
             src="/hashpack.png"
             alt="HashPack"
             className="wallet-icon"
-            style={{
-              top: "100%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-            }}
+            style={{ top: "100%", left: "50%" }}
           />
           <img
             src="/coinbase.png"
             alt="Coinbase"
             className="wallet-icon"
-            style={{
-              top: "50%",
-              left: "0%",
-              transform: "translate(-50%, -50%)",
-            }}
+            style={{ top: "50%", left: "0%" }}
           />
         </div>
 
         <h1
+          className="hero-title"
           style={{
             fontSize: "2.5rem",
             marginBottom: "4px",
@@ -226,6 +236,7 @@ export default function Hero({ onLaunch }) {
         </h1>
 
         <p
+          className="hero-text"
           style={{
             fontSize: "1.2rem",
             maxWidth: "700px",
@@ -241,7 +252,10 @@ export default function Hero({ onLaunch }) {
           privacy-first.
         </p>
 
-        <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
+        <div
+          className="hero-buttons"
+          style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}
+        >
           <button
             onClick={handleLaunch}
             style={{
@@ -256,8 +270,6 @@ export default function Hero({ onLaunch }) {
               transition: "all 0.3s ease",
               boxShadow: "0 6px 15px rgba(13, 18, 15, 0.3)",
             }}
-            onMouseOver={(e) => (e.target.style.backgroundColor = "#000")}
-            onMouseOut={(e) => (e.target.style.backgroundColor = "#121111")}
           >
             View Docs
           </button>
@@ -265,7 +277,7 @@ export default function Hero({ onLaunch }) {
           <button
             onClick={handleLaunch}
             style={{
-              background: "#eee",
+              background: "#fff",
               border: "none",
               borderRadius: "10px",
               padding: "14px 36px",
@@ -274,10 +286,7 @@ export default function Hero({ onLaunch }) {
               fontWeight: "600",
               cursor: "pointer",
               transition: "all 0.3s ease",
-              boxShadow: "0 6px 15px rgba(13, 18, 15, 0.3)",
             }}
-            onMouseOver={(e) => (e.target.style.background = "#fff")}
-            onMouseOut={(e) => (e.target.style.background = "#fff")}
           >
             Launch App 🚀
           </button>
@@ -288,18 +297,18 @@ export default function Hero({ onLaunch }) {
       <footer
         style={{
           position: "absolute",
-          bottom: "20px",
+          bottom: "15px",
           left: "50%",
           transform: "translateX(-50%)",
           textAlign: "center",
           color: "#b0b8c3",
-          fontSize: "0.95rem",
+          fontSize: "0.9rem",
           fontWeight: "400",
           letterSpacing: "0.5px",
-          zIndex: -1,
+          zIndex: 1,
         }}
       >
-        Made with <span style={{ color: "#00e676" }}>💚</span> love by{" "}
+        Made with <span style={{ color: "#00e676" }}>💚</span> by{" "}
         <span
           style={{
             background: "linear-gradient(90deg, #00e676, #00b0ff)",
