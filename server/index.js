@@ -8,7 +8,16 @@ const { PublicKey } = require("@hashgraph/sdk");
 const { ethers } = require("ethers");
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173", // for local dev
+      "https://your-vercel-project-name.vercel.app", // replace with your actual deployed frontend URL
+    ],
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 let nonces = {}; // store nonces temporarily
