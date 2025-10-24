@@ -1,5 +1,5 @@
-import { Card, CardContent, CardFooter } from "./ui/card";
-import { Button } from "./ui/button";
+import { Card, CardContent, CardFooter } from "./ui/Card";
+import { Button } from "./ui/Button";
 import { toast } from "react-toastify";
 
 export default function VerificationBadge({
