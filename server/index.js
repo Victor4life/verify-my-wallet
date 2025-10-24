@@ -11,7 +11,7 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "http://localhost:5173", // for local dev
+      "http://localhost:4173", // for local dev
       "https://your-vercel-project-name.vercel.app", // replace with your actual deployed frontend URL
     ],
     methods: ["GET", "POST"],
