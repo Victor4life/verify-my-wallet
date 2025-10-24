@@ -11,8 +11,8 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "http://localhost:4173", // for local dev
-      "https://your-vercel-project-name.vercel.app", // replace with your actual deployed frontend URL
+      "http://localhost:5173", // for local dev
+      "https://verify-my-wallet-mq9s.vercel.app/", // replace with your actual deployed frontend URL
     ],
     methods: ["GET", "POST"],
     credentials: true,
