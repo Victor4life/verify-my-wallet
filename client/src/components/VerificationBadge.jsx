@@ -39,87 +39,238 @@ export default function VerificationBadge({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-[#0f172a] via-[#111827] to-[#0a0a0a] text-white px-4">
-      <Card className="w-full max-w-md bg-slate-900/80 border border-white/10 backdrop-blur-xl shadow-2xl rounded-2xl">
-        <CardContent className="flex flex-col items-center text-center space-y-4 py-10">
-          <div className="relative group">
-            {/* Soft animated aura */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-500 via-emerald-400 to-cyan-300 blur-sm opacity-25 group-hover:opacity-50 animate-pulse-slow transition-all duration-300"></div>
+    <>
+      <style>{`
+        html, body {
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          overflow: hidden;
+        }
 
-            {/* Shield core (smaller size) */}
-            <div className="relative w-4 h-4 flex items-center justify-center rounded-full bg-gradient-to-br from-[#0d1117] to-[#111827] border border-white/10 shadow-[0_0_6px_rgba(0,255,200,0.15)]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="url(#shieldGradient)"
-                strokeWidth="1"
-                className="w-2.5 h-2.5 text-emerald-400 drop-shadow-[0_0_3px_rgba(16,185,129,0.7)] animate-glow"
-              >
-                <defs>
-                  <linearGradient
-                    id="shieldGradient"
-                    x1="0%"
-                    y1="0%"
-                    x2="100%"
-                    y2="100%"
-                  >
-                    <stop offset="0%" stopColor="#3b82f6" />
-                    <stop offset="100%" stopColor="#10b981" />
-                  </linearGradient>
-                </defs>
-                <path
-                  d="M12 2l8 4v6c0 5.25-3.25 10-8 10s-8-4.75-8-10V6l8-4z"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M9.5 12.5l2 2 3.5-3.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+        .verify-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          background: linear-gradient(to bottom right, #0f172a, #111827, #0a0a0a);
+          color: white;
+          padding: 1rem;
+          box-sizing: border-box;
+        }
+
+        .card {
+          width: 100%;
+          max-width: 28rem;
+          background: rgba(15, 23, 42, 0.8);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(20px);
+          border-radius: 1rem;
+          box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+          overflow: hidden;
+        }
+
+        .card-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          gap: 1rem;
+          padding: 2.5rem 1rem;
+        }
+
+        /* --- Badge (larger shield area) --- */
+        .shield-group {
+          position: relative;
+          display: inline-block;
+          width: 4rem;
+          height: 4rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .shield-aura {
+          position: absolute;
+          inset: 0;
+          border-radius: 9999px;
+          background: linear-gradient(to top right, #3b82f6, #10b981, #06b6d4);
+          filter: blur(6px);
+          opacity: 0.25;
+          transition: opacity 0.3s ease;
+        }
+
+        .shield-group:hover .shield-aura {
+          opacity: 0.5;
+        }
+
+        .shield-core {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 9999px;
+          background: linear-gradient(to bottom right, #0d1117, #111827);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          box-shadow: 0 0 10px rgba(0, 255, 200, 0.15);
+        }
+
+        .shield-icon {
+          width: 2rem;
+          height: 2rem;
+          filter: drop-shadow(0 0 3px rgba(16, 185, 129, 0.7));
+        }
+
+        .verify-title {
+          font-size: 1.6rem;
+          font-weight: 700;
+          color: #10b981;
+          margin-top: 0.5rem;
+        }
+
+        .verify-text {
+          color: #9ca3af;
+          font-size: 0.9rem;
+          max-width: 24rem;
+        }
+
+        .wallet-info {
+          background: rgba(30, 41, 59, 0.6);
+          border: 1px solid #334155;
+          border-radius: 0.5rem;
+          padding: 0.75rem 1rem;
+          font-size: 0.875rem;
+          color: #cbd5e1;
+          width: 100%;
+          word-break: break-word;
+        }
+
+        .wallet-address {
+          color: #3b82f6;
+        }
+
+        .card-footer {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          padding: 0 1.5rem 1.5rem;
+        }
+
+        .btn-primary {
+          width: 100%;
+          background: linear-gradient(to right, #3b82f6, #10b981);
+          color: white;
+          font-weight: 600;
+          border: none;
+          border-radius: 0.5rem;
+          padding: 0.75rem;
+          cursor: pointer;
+          transition: transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+          transform: scale(1.05);
+        }
+
+        .btn-outline {
+          width: 100%;
+          background: transparent;
+          border: 1px solid #60a5fa;
+          color: #93c5fd;
+          border-radius: 0.5rem;
+          padding: 0.75rem;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .btn-outline:hover {
+          background: rgba(23, 37, 84, 0.4);
+          color: white;
+        }
+
+        /* Prevent page overflow and center cleanly on smaller screens */
+        @media (max-height: 700px) {
+          .verify-container {
+            height: auto;
+            min-height: 100vh;
+            overflow-y: auto;
+            padding: 2rem 1rem;
+          }
+        }
+      `}</style>
+
+      <div className="verify-container">
+        <div className="card">
+          <div className="card-content">
+            <div className="shield-group">
+              <div className="shield-aura"></div>
+              <div className="shield-core">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="url(#shieldGradient)"
+                  strokeWidth="1"
+                  className="shield-icon"
+                >
+                  <defs>
+                    <linearGradient
+                      id="shieldGradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
+                      <stop offset="0%" stopColor="#3b82f6" />
+                      <stop offset="100%" stopColor="#10b981" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M12 2l8 4v6c0 5.25-3.25 10-8 10s-8-4.75-8-10V6l8-4z"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M9.5 12.5l2 2 3.5-3.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            <h2 className="verify-title">Wallet Verified Successfully!</h2>
+
+            <p className="verify-text">
+              Your {walletType?.toUpperCase()} wallet ownership has been
+              verified anonymously. You can now download or share your
+              verification proof.
+            </p>
+
+            <div className="wallet-info">
+              <strong>Wallet:</strong>{" "}
+              <span className="wallet-address">
+                {walletAddress
+                  ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
+                  : "Unknown"}
+              </span>
+              <br />
+              <strong>Chain:</strong> {walletType?.toUpperCase()}
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold text-emerald-400">
-            Wallet Verified Successfully!
-          </h2>
+          <div className="card-footer">
+            <button onClick={handleDownloadProof} className="btn-primary">
+              📥 Download Proof JSON
+            </button>
 
-          <p className="text-gray-400 text-sm max-w-sm">
-            Your {walletType?.toUpperCase()} wallet ownership has been verified
-            anonymously. You can now download or share your verification proof.
-          </p>
-
-          <div className="bg-slate-800/60 rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-300 w-full break-words">
-            <strong>Wallet:</strong>{" "}
-            <span className="text-blue-400">
-              {walletAddress
-                ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
-                : "Unknown"}
-            </span>
-            <br />
-            <strong>Chain:</strong> {walletType?.toUpperCase()}
+            <button onClick={handleCopyLink} className="btn-outline">
+              🔗 Copy Verification Link
+            </button>
           </div>
-        </CardContent>
-
-        <CardFooter className="flex flex-col gap-3 px-6 pb-6">
-          <Button
-            onClick={handleDownloadProof}
-            className="w-full bg-gradient-to-r from-blue-500 to-emerald-400 text-white font-semibold rounded-lg hover:scale-105 transition-transform"
-          >
-            📥 Download Proof JSON
-          </Button>
-
-          <Button
-            onClick={handleCopyLink}
-            variant="outline"
-            className="w-full border border-blue-400 text-blue-300 hover:bg-blue-950/40 hover:text-white transition-colors"
-          >
-            🔗 Copy Verification Link
-          </Button>
-        </CardFooter>
-      </Card>
-    </div>
+        </div>
+      </div>
+    </>
   );
 }

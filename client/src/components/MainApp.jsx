@@ -210,7 +210,7 @@ function MainApp() {
         style={{
           position: "absolute",
           inset: 0,
-          background: "rgba(0, 0, 0, 0.92)",
+          background: "rgba(0, 0, 0, 0.94)",
           backdropFilter: "blur(4px)",
           zIndex: 0,
         }}
@@ -221,7 +221,8 @@ function MainApp() {
         style={{
           position: "relative",
           zIndex: 1,
-          background: "rgba(22, 27, 34, 0.95)",
+          background:
+            "linear-gradient(135deg, rgba(0,0,0,0.85), rgba(20,25,35,0.85))",
           border: "1px solid rgba(255, 255, 255, 0.1)",
           borderRadius: "12px",
           padding: "40px 30px",
