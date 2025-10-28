@@ -1,0 +1,16 @@
+{
+  "name": "@verify-my-wallet/sdk",
+  "version": "1.0.0",
+  "description": "Verify My Wallet SDK for Hedera and Web3 apps",
+  "main": "index.js",
+  "type": "module",
+  "author": "Team VerifyMyWallet",
+  "license": "MIT",
+  "keywords": [
+    "hedera",
+    "wallet",
+    "verification",
+    "sdk",
+    "web3"
+  ]
+}
